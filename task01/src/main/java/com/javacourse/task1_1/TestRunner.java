@@ -1,6 +1,10 @@
 package com.javacourse.task1_1;
 
-import com.javacourse.task1_1.annotation.*;
+import com.javacourse.task1_1.annotation.After;
+import com.javacourse.task1_1.annotation.AfterClass;
+import com.javacourse.task1_1.annotation.Before;
+import com.javacourse.task1_1.annotation.BeforeClass;
+import com.javacourse.task1_1.annotation.Test;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
