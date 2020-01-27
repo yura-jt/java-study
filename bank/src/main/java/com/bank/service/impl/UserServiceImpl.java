@@ -10,6 +10,7 @@ import com.bank.service.validator.ValidateException;
 import com.bank.service.validator.Validator;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     private static final int USER_PER_PAGE = 5;
@@ -44,9 +45,19 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new ValidateException("User with such e-mail is absent");
         }
-        userRepository.save(user);
 
-        return userRepository.findByEmail(user.getEmail()).get();
+        User userToPersist = User.builder()
+                .withId(user.getId())
+                .withEmail(user.getEmail())
+                .withPassword(passwordEncryptor.encrypt(user.getPassword()))
+                .withAccounts(user.getAccounts())
+                .build();
+
+        userRepository.save(userToPersist);
+
+        return userRepository
+                .findByEmail(user.getEmail())
+                .get();
     }
 
     @Override
@@ -60,6 +71,16 @@ public class UserServiceImpl implements UserService {
 
         final Pageable<User> users = userRepository.findAll(new Page(page, USER_PER_PAGE));
         return users.getItems();
+    }
+
+    @Override
+    public User findById(int id) {
+        return userRepository.findById(id).get();
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).get();
     }
 
     private int getMaxPage() {

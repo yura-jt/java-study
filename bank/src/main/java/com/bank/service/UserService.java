@@ -10,5 +10,9 @@ public interface UserService {
 
     User register(User user);
 
+    User findById(int id);
+
+    User findByEmail(String email);
+
     List<User> findAll(int page);
 }

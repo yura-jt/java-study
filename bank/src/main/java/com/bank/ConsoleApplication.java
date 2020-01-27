@@ -5,6 +5,6 @@ import com.bank.injector.ApplicationInjector;
 
 public class ConsoleApplication {
     public static void main(String[] args) {
-        new Controller(ApplicationInjector.getInstance());
+        new Controller(ApplicationInjector.getInstance()).run();
     }
 }

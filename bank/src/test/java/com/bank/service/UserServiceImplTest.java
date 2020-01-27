@@ -67,7 +67,6 @@ public class UserServiceImplTest {
         assertTrue(isLogin);
         verify(passwordEncryptor).encrypt(eq(PASSWORD));
         verify(userRepository).findByEmail(eq(USER_EMAIL));
-        verifyZeroInteractions(userValidator);
     }
 
     @Test
@@ -80,7 +79,7 @@ public class UserServiceImplTest {
         assertFalse(isLogin);
         verify(passwordEncryptor).encrypt(eq(PASSWORD));
         verify(userRepository).findByEmail(eq(USER_EMAIL));
-        verifyZeroInteractions(userValidator);
+//        verifyZeroInteractions(userValidator);
     }
 
     @Test
@@ -93,7 +92,6 @@ public class UserServiceImplTest {
         assertFalse(isLogin);
         verify(passwordEncryptor).encrypt(eq("INCORRECT_PASSWORD"));
         verify(userRepository).findByEmail(eq(USER_EMAIL));
-        verifyZeroInteractions(userValidator);
     }
 
     @Test
