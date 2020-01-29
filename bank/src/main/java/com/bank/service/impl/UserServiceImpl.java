@@ -55,9 +55,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(userToPersist);
 
-        return userRepository
-                .findByEmail(user.getEmail())
-                .get();
+        return user;
     }
 
     @Override
@@ -75,21 +73,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(int id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email).get();
+        return userRepository.findByEmail(email).orElse(null);
     }
 
     private int getMaxPage() {
         int totalUsers = (int) userRepository.count();
-        int pages = totalUsers / USER_PER_PAGE;
+        int page = totalUsers / USER_PER_PAGE;
         if (totalUsers % USER_PER_PAGE != 0) {
-            pages++;
+            page++;
         }
-        return pages;
+        return page == 0 ? 1 : page;
     }
 
     private void validateCredentials(String email, String password) {

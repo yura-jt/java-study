@@ -1,5 +1,8 @@
 package com.bank.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.math.BigInteger;
@@ -8,6 +11,8 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
 public class PasswordEncryptor {
+    private static final Logger logger = LogManager.getLogger(PasswordEncryptor.class);
+
     private static final int ITERATION_COUNT = 1000;
     private static final int KEY_LENGTH = 64 * 8;
     private static final int HASH_SIZE = 16;
@@ -23,6 +28,7 @@ public class PasswordEncryptor {
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             hash = skf.generateSecret(spec).getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            logger.warn(e);
         }
         return toHex(hash);
     }

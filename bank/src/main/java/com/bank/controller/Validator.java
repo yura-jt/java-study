@@ -1,7 +1,12 @@
 package com.bank.controller;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Validator {
+    private static final Logger logger = LogManager.getLogger(Validator.class);
+
     static boolean isValidString(String str) {
         return str != null && str.length() >= 1;
     }
@@ -13,6 +18,7 @@ public class Validator {
             key = Integer.parseInt(str);
             isValidInt = true;
         } catch (NumberFormatException e) {
+            logger.warn(e);
         }
         if (!isValidInt) {
             return false;

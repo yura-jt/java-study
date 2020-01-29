@@ -35,12 +35,6 @@ public class UserRepositoryImpl implements UserRepository {
         return Optional.ofNullable(userIdToUser.get(id));
     }
 
-
-    @Override
-    public List<User> findAll(int page, int itemPerPage) {
-        return findAll(new Page(page, itemPerPage)).getItems();
-    }
-
     @Override
     public Pageable<User> findAll(Page page) {
         int usagePerPage = page.getItemsPerPage();

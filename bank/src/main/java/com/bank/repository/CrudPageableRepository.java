@@ -7,11 +7,7 @@ import java.util.List;
 
 public interface CrudPageableRepository<E> extends CrudRepository<E> {
 
-    List<E> findAll(int page, int itemsPerPage);
-
-    default List<E> findAll(){
-        return Collections.emptyList();
-    }
+    List<E> findAll();
 
     Pageable<E> findAll(Page page);
 

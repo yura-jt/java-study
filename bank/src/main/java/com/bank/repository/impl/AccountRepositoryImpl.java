@@ -4,10 +4,7 @@ import com.bank.domain.Account;
 import com.bank.repository.AccountRepository;
 import com.bank.repository.Page;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AccountRepositoryImpl implements AccountRepository {
@@ -24,8 +21,8 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public List<Account> findAll(int page, int itemPerPage) {
-        return findAll(new Page(page, itemPerPage)).getItems();
+    public List<Account> findAll() {
+        return new ArrayList<>(accountIdToAccount.values());
     }
 
     @Override
